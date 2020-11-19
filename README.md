@@ -1,5 +1,5 @@
 # Algorithm studying for coding test
 
-## BaekJoon
+#### BaekJoon
 
-## Programmers
+#### Programmers
