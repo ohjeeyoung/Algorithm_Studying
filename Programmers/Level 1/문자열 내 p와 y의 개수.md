@@ -2,7 +2,7 @@
 =================================================================
 
 ### 문제
-
+https://programmers.co.kr/learn/courses/30/lessons/12916
 
 ### 코드
 
@@ -26,6 +26,9 @@ def solution(s):
         answer = False
 
     return answer
+
+def solution(s):
+    return s.lower().count('p') == s.lower().count('y')
 ```
 
 ### 풀이
