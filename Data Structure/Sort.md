@@ -96,3 +96,81 @@ Worst Case: 선택정렬 > 삽입정렬
 
 
 - 특징
+
+4. 퀵정렬(Quick Sort)
+> 퀵정렬은 입력의 맨 왼쪽 원소(피벗, Pivot)를 기준으로 피벗보다 작은 원소들과 큰 원소들을 각각 피벗의 좌우로 분할한 후,
+> 피벗보다 작은 부분과 피벗보다 큰 부분을 각각 재귀적으로 정렬하는 알고리즘
+
+```python
+# 퀵정렬
+
+def quick_sort(array, start, end):
+    if start >= end:    # 원소가 1개인 경우 종료
+        return
+    pivot = start   # 피벗은 첫 번째 원소
+    left = start + 1
+    right = end
+    while(left <= right):
+        # 피벗보다 큰 데이터를 찾을 때까지 반복
+        while(left <= end and array[left] <= array[pivot]):
+            left += 1
+        # 피벗보다 작은 데이터를 찾을 때까지 반복
+        while(right > start and array[right] >= array[pivot]):
+            right -= 1
+        if(left > right):   # 엇갈렸다면 작은 데이터와 피벗을 교체
+            array[right], array[pivot] = array[pivot], array[right]
+        else:   # 엇갈리지 않았다면 작은 데이터와 큰 데이터를 교체
+            array[left], array[right] = array[right], array[left]
+    # 분할 이후 왼쪽 부분과 오른쪽 부분에서 각각 정렬 수행
+    quick_sort(array, start, right -1)
+    quick_sort(array, right+1, end)
+
+array = [5, 7, 9, 0, 3, 1, 6, 2, 4, 8]
+quick_sort(array, 0, len(array) - 1)
+print(array)
+
+
+# 퀵정렬 ver.2
+
+def quick_sort2(array):
+    # 리스트가 하나 이하의 원소만을 담고 있다면 종료
+    if len(array) <= 1:
+        return array
+    pivot = array[0]    # 피벗은 첫 번째 원소
+    tail = array[1:]    # 피벗을 제외한 리스트
+
+    left_side = [x for x in tail if x <= pivot] # 분할된 왼쪽 부분
+    right_side = [x for x in tail if x > pivot] # 분할된 오른쪽 부분
+
+    # 분할 이후 왼쪽 부분과 오른쪽 부분에서 각각 정렬 수행하고, 전체 리스트 반환
+    return quick_sort2(left_side) + [pivot] + quick_sort2(right_side)
+
+print(quick_sort2(array))
+```
+
+- Time Complexity
+
+최선경우: O(NlogN)
+
+평균경우: O(NlogN)
+
+최악경우: O(N^2)
+
+- 공간 복잡도
+
+주어진 배열 안에서 교환(swap)을 통해 정렬이 수행되므로 O(N)
+
+- 특징
+
+Primitive Type 데이터를 정렬하는 자바 Standard Edition 6의 시스템 sort에 사용되고, C언어 라이브러리의 qsort에서 사용
+
+Unix, g++, Visual C++ 등에서도 시스템 정렬로 사용
+
+불필요한 데이터의 이동을 줄이고 먼 거리의 데이터를 교환할 뿐만 아니라, 한번 결정된 피벗들이 추후 연산에서 제외되는
+특성 때문에, 시간 복잡도가 O(NlogN)을 가지는 다른 정렬 알고리즘과 비교했을 때도 가장 빠름
+
+정렬하고자 하는 배열 안에서 교환하는 방식이므로, 다른 메모리 공간을 필요로 하지 않음
+
+불안정 정렬(Unstable Sort)
+
+정렬된 배열에 대해서는 불균형 분할에 의해 오히려 수행시간이 더 많이 걸림
