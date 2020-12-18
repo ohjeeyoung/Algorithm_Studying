@@ -1,6 +1,7 @@
 ## DFS(Depth First Search)
 
 > dfs는 깊이 우선 탐색, 그래프에서 깊은 부분을 우선적으로 탐색하는 알고리즘
+
 > 스택 자료구조(혹은 재귀 함수)를 이용
 
 ```python
@@ -51,6 +52,7 @@ dfs(graph, 1, visited)
 ## BFS(Breadth First Search)
 
 > bfs는 너비 우선 탐색, 그래프에서 가까운 노드부터 우선적으로 탐색하는 알고리즘
+
 > 큐 자료구조를 이용
 
 ```python
